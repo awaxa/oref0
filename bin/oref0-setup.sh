@@ -170,7 +170,16 @@ if [[ -z "$DIR" || -z "$serial" ]]; then
         echocolor "You're using a different model pump. Got it."
     fi
 
-    read -p "What kind of CGM are you using? (e.g., G4-upload, G4-local-only, G5, G5-upload, MDT, xdrip?) Note: G4-local-only will NOT upload BGs from a plugged in receiver to Nightscout:   " -r
+    echo "What kind of CGM would you like to configure for offline use? Options are:"
+    echo "G4-upload: will use and upload BGs from a plugged in G4 receiver to Nightscout"
+    echo "G4-local-only: will use BGs from a plugged in G4, but will *not* upload them"
+    echo "G5: will use BGs from a plugged in G5, but will *not* upload them (the G5 app usually does that)"
+    echo "G5-upload: will use and upload BGs from a plugged in G5 receiver to Nightscout"
+    echo "MDT: will use and upload BGs from an Enlite sensor paired to your pump"
+    echo "xdrip: will work with an xDrip receiver app on your Android phone"
+    echo "Note: no matter which option you choose, CGM data will also be downloaded from NS when available."
+    echo
+    read -p "What kind of CGM would you like to configure?:   " -r
     CGM=$REPLY
     echocolor "Ok, $CGM it is."
     echo
