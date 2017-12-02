@@ -15,9 +15,11 @@ main() {
 
 function overtemp {
     # check for CPU temperature above 85°C
-    sensors -u 2>/dev/null | awk '$NF > 85' | grep input \
-    && echo Edison is too hot: waiting for it to cool down at $(date)\
-    && echo Please ensure rig is properly ventilated
+    # skip unless rig is an Edison
+    id -u edison 2>/dev/null && \
+        sensors -u 2>/dev/null | awk '$NF > 85' | grep input \
+        && echo Edison is too hot: waiting for it to cool down at $(date)\
+        && echo Please ensure rig is properly ventilated
 }
 
 function highload {
